@@ -1,0 +1,172 @@
+@import "./variables.scss";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html,
+body {
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+  font-family: $Poppins;
+  color: $dark;
+  background-image: linear-gradient(to right, #decba4, #3e5151);
+}
+
+ul {
+  margin-bottom: 0rem;
+}
+
+body {
+  width: 100%;
+  font-family: $Poppins;
+  color: $dark;
+  background-image: linear-gradient(to right, #decba4, #3e5151);
+}
+
+#root {
+  height: 100%;
+}
+
+// ::-webkit-scrollbar {
+//   width: 0; /* Remove scrollbar space */
+//   background: transparent; /* Optional: just make scrollbar invisible */
+// }
+
+.jumbotron-fluid {
+  background-color: #f0e9d2;
+}
+
+.selected {
+  background-color: rgba($primary, 0.1);
+}
+
+.image {
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+  object-fit: cover;
+}
+
+.profile-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+#input[type="file"] {
+  display: none;
+}
+
+.image-container {
+  position: relative;
+}
+
+.wrapped {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+}
+
+.btn-size {
+  font-size: 0.6rem;
+  font-weight: 500;
+  margin-bottom: 0.6rem;
+  padding: 0.2rem 0.3rem;
+}
+//-------FORM SELECT -------//
+.form-select {
+  height: 2.5rem;
+  border-radius: 5px;
+  border: 1px solid #cccccc;
+  border-bottom: 3px solid #cccccc;
+  width: 100%;
+  transition: 0.3s;
+}
+
+.form-select:focus {
+  border-bottom: 3px solid #3e065f;
+}
+//-------END -------//
+
+.title {
+  color: #333;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.container-upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fa-arrow-alt-circle-up {
+  margin-right: 4px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.text-td {
+  font-size: 14px;
+}
+
+.centered {
+  margin: 1rem auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  cursor: pointer;
+  outline: none;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0px 15px 0 15px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: $primary;
+  color: $dark;
+  border: 1px solid transparent;
+  transition: 0.3s ease all;
+
+  &:hover {
+    border-color: $primary;
+    background: rgba($primary, 0.1);
+    color: rgba($dark, 0.8);
+  }
+  &:active {
+    border-color: $primary;
+    background: linear-gradient(rgba($primary, 0.2), rgba($primary, 0.3));
+    color: $primary;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.home {
+  margin: auto 0rem;
+  text-align: center;
+  font-size: 1rem;
+  @media (max-width: 650px) {
+    margin: auto 0rem;
+    font-size: 12px;
+  }
+}
+
+.test {
+  display: grid;
+  grid-template-rows: repeat(4, 15rem);
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 9rem;
+}
+
+.item {
+  text-align: center;
+  background-color: rgba(#fff, 0.8);
+}

@@ -1,0 +1,35 @@
+@import "../../styles/variables.scss";
+
+.btn__uploaded {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  outline: none;
+  padding: 2px 1px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-family: inherit;
+  background: rgba($primary, 0.1);
+  color: $dark;
+  border: 1px solid transparent;
+  font-weight: 500;
+  margin-right: 0.5rem;
+  transition: 0.3s ease all;
+
+  &:hover {
+    border-color: #3e065f;
+    background: rgba($primary, 0.2);
+    // color: $primary;
+  }
+  // &:active {
+  //   outline: none;
+  //   border: none;
+  // }
+}
+
+.btn__delete {
+  cursor: pointer;
+  color: #c85c5c;
+  font-size: 1.3rem;
+}
