@@ -1,4 +1,9 @@
 @import "./variables.scss";
+@import "./slider.scss";
+@import "./card.scss";
+@import "./control.css";
+@import "./button.scss";
+@import "./dark.scss";
 
 * {
   box-sizing: border-box;
@@ -8,39 +13,63 @@
 html,
 body {
   padding: 0;
-  overflow-x: hidden;
   width: 100%;
-  font-family: $Poppins;
+  font-family: $Poppins !important;
+  max-width: 95ch;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+body.light {
+  background-color: #fff;
   color: $dark;
-  background-image: linear-gradient(to right, #decba4, #3e5151);
+  transition: background-color 0.25s ease-in-out;
 }
 
+body.dark {
+  background-color: rgba(#323232, 0.95);
+  transition: background-color 0.25s ease-in-out;
+  color: $light;
+}
+/* custom scrollbar */
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #9d9d9d;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #7f7c82;
+}
 ul {
   margin-bottom: 0rem;
-}
-
-body {
-  width: 100%;
-  font-family: $Poppins;
-  color: $dark;
-  background-image: linear-gradient(to right, #decba4, #3e5151);
 }
 
 #root {
   height: 100%;
 }
 
-// ::-webkit-scrollbar {
-//   width: 0; /* Remove scrollbar space */
-//   background: transparent; /* Optional: just make scrollbar invisible */
-// }
-
 .jumbotron-fluid {
   background-color: #f0e9d2;
 }
 
 .selected {
-  background-color: rgba($primary, 0.1);
+  padding-bottom: 0.25rem;
+  box-shadow: 0 2px 0 #993942;
+  color: #000 !important;
+  opacity: 1 !important;
+
+  @media (max-width: 768px) {
+    color: #fff !important;
+  }
 }
 
 .image {
@@ -125,27 +154,24 @@ body {
 .button {
   cursor: pointer;
   outline: none;
-  padding: 0.5rem 1.25rem;
-  border-radius: 0px 15px 0 15px;
+  border-radius: 10px;
+  padding: 8px 30px;
   font-size: 1rem;
+  font-weight: 600;
   font-family: inherit;
-  background: $primary;
-  color: $dark;
-  border: 1px solid transparent;
+  background: rgba(#993942, 0.25);
+  color: #993942;
+  font-weight: 500;
+  border: transparent;
   transition: 0.3s ease all;
 
   &:hover {
-    border-color: $primary;
-    background: rgba($primary, 0.1);
-    color: rgba($dark, 0.8);
+    border-color: none;
+    background: rgba(#993942, 0.35);
   }
   &:active {
-    border-color: $primary;
-    background: linear-gradient(rgba($primary, 0.2), rgba($primary, 0.3));
-    color: $primary;
-  }
-  &:focus {
-    outline: none;
+    border-color: none;
+    background: rgba(#993942, 0.35);
   }
 }
 
@@ -166,7 +192,63 @@ body {
   grid-gap: 9rem;
 }
 
-.item {
-  text-align: center;
-  background-color: rgba(#fff, 0.8);
+.mb-5rem {
+  margin-bottom: 6rem;
+}
+
+.mlr-6rem {
+  margin: auto 6rem;
+  @media (max-width: 768px) {
+    margin: 0;
+  }
+}
+
+.people-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-auto-rows: 300px;
+  gap: 100px;
+  margin-bottom: 10rem;
+  justify-content: center;
+  align-items: center;
+  margin: auto 6rem;
+}
+
+//->SLIDER <-//
+
+.image_dash {
+  margin-bottom: 3rem;
+}
+
+.image_admin {
+  width: 80%;
+  height: 100%;
+  margin-bottom: 4rem;
+}
+
+.mt-5rem {
+  margin-top: 5rem;
+}
+
+.rec.rec-arrow {
+  background-color: #fff;
+  color: #333;
+}
+/* round buttons on hover */
+.rec.rec-arrow:hover {
+  border-radius: 50%;
+  background-color: #333 !important;
+}
+
+.rec.rec-arrow:disabled {
+  visibility: hidden;
+}
+.rec .rec-dot:hover {
+  box-shadow: 0 0 1px 3px #333;
+}
+
+.rec .rec-dot_active {
+  background-color: rgba(#333, 0.6) !important;
+  opacity: 0.8;
+  box-shadow: 0 0 1px 3px #333;
 }

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import classes from "./ContactForm.module.scss";
-import { useDispatch } from "react-redux";
-import { loadingActions } from "../../hooks/Loading";
 import Modal from "../UI/Modal";
 
 const ContactForm = ({
@@ -20,10 +18,8 @@ const ContactForm = ({
     age: "",
     gender: "",
   };
-  const dispatch = useDispatch();
 
   const [values, setValues] = useState(initialFieldValues);
-
   // add or edit
   useEffect(() => {
     if (currentId === "") {
@@ -50,10 +46,6 @@ const ContactForm = ({
   const handleFormSubmit = (e) => {
     e.preventDefault();
     addOrEdit(values);
-  };
-
-  const loadingAct = () => {
-    dispatch(loadingActions.startLoading());
   };
 
   const closeFormHandler = () => {
@@ -152,11 +144,7 @@ const ContactForm = ({
             <div className="submit">
               {currentId === "" ? (
                 <div className={classes.btn}>
-                  <button
-                    type="submit"
-                    className={classes.btn__submit}
-                    onClick={loadingAct}
-                  >
+                  <button type="submit" className={classes.btn__submit}>
                     Create
                   </button>
                 </div>

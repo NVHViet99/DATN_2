@@ -12,7 +12,7 @@ const List = ({ listItem }) => {
     key.forEach((value) => {
       let name;
       const id = idReg[value].split(" ")[1];
-      listItem.map((item) => {
+      listItem.forEach((item) => {
         if (item.Id === id) {
           name = item.fullName;
         }

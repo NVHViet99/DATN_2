@@ -1,0 +1,40 @@
+#darkMode {
+  background: transparent url("../../src/images/moon.png") no-repeat center;
+  filter: grayscale(100%);
+  background-size: 30px 30px;
+  width: 55px;
+  height: 55px;
+  border: none;
+  outline: none;
+  border-radius: 50%;
+  transition: background-color 0.3s ease-in-out, filter 0.3s ease-in-out;
+
+  position: fixed;
+  bottom: 120px;
+  right: 50px;
+  font-size: 35px;
+  box-shadow: 0 5px 10px #ccc;
+  z-index: 10;
+
+  @media (max-width: 768px) {
+    width: 45px;
+    height: 45px;
+    bottom: 80px;
+    right: 20px;
+    font-size: 25px;
+    opacity: 0.97;
+  }
+}
+
+#darkMode:hover,
+#darkMode:focus {
+  filter: none;
+  background-color: #333;
+  cursor: pointer;
+}
+
+#darkMode.clicked {
+  filter: none !important;
+  background-color: #333;
+  border: none;
+}

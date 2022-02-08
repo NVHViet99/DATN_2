@@ -1,0 +1,31 @@
+.animate {
+  transition: all 2s ease;
+}
+
+.top {
+  position: fixed;
+  width: 55px;
+  height: 55px;
+  bottom: 50px;
+  right: 50px;
+  font-size: 35px;
+  background: #993942;
+  color: white;
+  cursor: pointer;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 5px 10px #ccc;
+
+  @media (max-width: 768px) {
+    width: 45px;
+    height: 45px;
+    bottom: 20px;
+    right: 20px;
+    font-size: 25px;
+    opacity: 0.97;
+  }
+}
+
+.top:hover {
+  opacity: 0.9;
+}

@@ -98,7 +98,7 @@ const AuthForm = () => {
           initial="hidden" // Set the initial state to variants.hidden
           animate="enter" // Animated state to variants.enter
           exit="exit" // Exit state (used later) to variants.exit
-          transition={{ type: "linear", duration: 0.5 }}
+          transition={{ type: "linear", duration: 0.3 }}
         >
           <div>
             <span>

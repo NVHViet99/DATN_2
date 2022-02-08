@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "./HistoryTable.module.scss";
 
-import { useDispatch, useSelector } from "react-redux";
-import { loadingActions } from "../../hooks/Loading";
+import { useSelector } from "react-redux";
 
 import LoadingSpinner from "../UI/LoadingSpinner";
 
@@ -11,16 +10,13 @@ import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
-import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
+import filterFactory from "react-bootstrap-table2-filter";
 
 import "react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css";
-import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+import ToolkitProvider from "react-bootstrap-table2-toolkit";
 import { motion } from "framer-motion";
 
 import firebase from "../../utilities/firebase";
-
-let dayFilter;
-let nameFilter;
 
 const variants = {
   hidden: { opacity: 0 },
@@ -56,21 +52,10 @@ let headerStyle = {
 
 const columns = [
   {
-    dataField: "id",
-    style: colStyle,
-    text: "ID",
-    sort: true,
-    headerStyle: headerStyle,
-  },
-  {
     dataField: "date",
     text: "Date",
     sort: true,
-    filter: textFilter({
-      getFilter: (filter) => {
-        dayFilter = filter;
-      },
-    }),
+
     style: colStyle,
     headerStyle: headerStyle,
   },
@@ -81,32 +66,18 @@ const columns = [
     headerStyle: headerStyle,
   },
   {
-    dataField: "name",
-    text: "Name",
-    filter: textFilter({
-      getFilter: (filter) => {
-        nameFilter = filter;
-      },
-    }),
-    style: colStyle,
-    headerStyle: headerStyle,
-  },
-  {
-    dataField: "status",
-    text: "Status",
+    dataField: "value",
+    text: "Value",
+
     style: colStyle,
     headerStyle: headerStyle,
   },
 ];
 
-export default function HistoryTable() {
+export default function HistorySensor() {
   const [idReg, setIdReg] = useState();
-  const [listItem, setListItem] = useState([]);
-
-  const dispatch = useDispatch();
+  const [values, setValues] = useState("matchingHum");
   const loading = useSelector((state) => state.loading.isLoading);
-
-  const { SearchBar } = Search;
 
   // Export to Excel
   const MyExportCSV = (props) => {
@@ -127,32 +98,22 @@ export default function HistoryTable() {
   if (idReg) {
     const key = Object.keys(idReg);
     key.forEach((value) => {
-      let name;
-      const id = idReg[value].split(" ")[1];
-      listItem.forEach((item) => {
-        if (item.Id === id) {
-          name = item.fullName;
-        }
-      });
       result.push({
-        id: id,
-        date: idReg[value].split(" ")[5],
-        time: idReg[value].split(" ")[6],
-        name: name,
-        status: idReg[value].split(" ")[7],
+        date: idReg[value].split(" ")[2],
+        time: idReg[value].split(" ")[1],
+        value: idReg[value].split(" ")[0],
       });
     });
   }
 
-  //clear input
-  const handleClick = () => {
-    dayFilter("");
-    nameFilter("");
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setValues(value);
   };
 
   //get datetime sign in from firebase
   useEffect(() => {
-    const idRef = firebase.database().ref("return/Matched_Id");
+    const idRef = firebase.database().ref(`sensor/${values}`);
 
     idRef.on("value", (snapshot) => {
       const items = snapshot.val();
@@ -161,23 +122,9 @@ export default function HistoryTable() {
         newId.push(items[id]);
       }
       setIdReg(newId);
+      console.log(newId);
     });
-  }, []);
-
-  //get data users
-  useEffect(() => {
-    dispatch(loadingActions.startLoading());
-    const listRef = firebase.database().ref("fingerPrintId");
-    listRef.on("value", (snapshot) => {
-      const items = snapshot.val();
-      const listItems = [];
-      for (let i in items) {
-        listItems.push(items[i]);
-      }
-      setListItem(listItems);
-      dispatch(loadingActions.stopLoading());
-    });
-  }, [dispatch]);
+  }, [values]);
 
   // render UI
   return (
@@ -189,7 +136,7 @@ export default function HistoryTable() {
       exit="exit"
       transition={{ type: "linear", duration: 0.3 }}
     >
-      <div className="card mb-5rem">
+      <div className="card">
         {loading && <LoadingSpinner />}
 
         <ToolkitProvider
@@ -203,18 +150,20 @@ export default function HistoryTable() {
           {(props) => (
             <div className={classes.container}>
               <div className="card-body text-center">
-                <div className={classes.title}>Employees History</div>
-                <div className={classes.button}>
-                  <button
-                    className={classes.button__clear}
-                    onClick={handleClick}
+                <div className={classes.title}>Sensor Data History</div>
+                <div className="option">
+                  <span> Sort by:</span>
+                  <select
+                    className="option__select"
+                    aria-label=".form-select-lg example"
+                    onChange={handleInputChange}
+                    value={values}
+                    name="gender"
                   >
-                    Clear all filters
-                  </button>
-                  <SearchBar
-                    className={classes.button__search}
-                    {...props.searchProps}
-                  />
+                    <option value="matching">Temperature</option>
+                    <option value="matchingHum">Humidity</option>
+                    <option value="matchingPM">PM2.5</option>
+                  </select>
                 </div>
               </div>
 

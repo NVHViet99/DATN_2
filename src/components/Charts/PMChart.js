@@ -11,16 +11,16 @@ import {
 import React, { useState, useEffect } from "react";
 import firebase from "../../utilities/firebase";
 
-function Chart() {
+function PMChart() {
   const [idReg, setIdReg] = useState();
 
-  // logic split temp, time, name and ID
+  // logic split PM, time, name and ID
   let result = [];
   if (idReg) {
     const key = Object.keys(idReg);
     key.forEach((value) => {
       result.push({
-        temp: idReg[value].split(" ")[0],
+        PM: +idReg[value].split(" ")[0],
         time:
           idReg[value].split(" ")[1] +
           String("__") +
@@ -31,7 +31,7 @@ function Chart() {
 
   //get datetime sign in from firebase
   useEffect(() => {
-    const idRef = firebase.database().ref("sensor/matching");
+    const idRef = firebase.database().ref("sensor/matchingPM");
 
     idRef.on("value", (snapshot) => {
       const items = snapshot.val();
@@ -49,22 +49,24 @@ function Chart() {
     rsTemp.push(result[i]);
   }
 
+  console.log(rsTemp);
+
   return (
     <div className="card mb-5rem">
-      <h2 className="text-center">Chart of temperature</h2>
+      <h2 className="text-center">Chart of PM2.5</h2>
       <ResponsiveContainer width="100%" aspect={3}>
         <AreaChart data={rsTemp}>
           <defs>
-            <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#F05454" stopOpacity={0.4} />
-              <stop offset="75%" stopColor="#F05454" stopOpacity={0.05} />
+            <linearGradient id="colorPM" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#8946A6" stopOpacity={0.4} />
+              <stop offset="75%" stopColor="#8946A6" stopOpacity={0.05} />
             </linearGradient>
           </defs>
           <Area
-            dataKey="temp"
+            dataKey="PM"
             type="monotone"
-            stroke="#F05454"
-            fill="url(#color)"
+            stroke="#8946A6"
+            fill="url(#colorPM)"
           />
           <XAxis
             // tick={false}
@@ -77,13 +79,13 @@ function Chart() {
             interval="preserveStartEnd"
             // tick={false}
             tick={{ fill: "#252525", fontSize: 14, fontWeight: 400 }}
-            unit="°C"
+            unit="ug/m3"
             axisLine={true}
-            tickCount={4}
+            // tickCount={8}
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: "#F05454",
+              backgroundColor: "#8946A6",
               color: "#fff",
               fontSize: "13px",
             }}
@@ -93,13 +95,13 @@ function Chart() {
           <CartesianGrid opacity={0.1} />
           <Line
             type="monotone"
-            dataKey="temp"
-            stroke="#A13333"
+            dataKey="PM"
+            stroke="#6867AC"
             strokeWidth="2"
-            dot={{ fill: "#ECDBBA", stroke: "#F05454", strokeWidth: 2, r: 5 }}
+            dot={{ fill: "#ECDBBA", stroke: "#8946A6", strokeWidth: 2, r: 5 }}
             activeDot={{
               fill: "#ECDBBA",
-              stroke: "#A13333",
+              stroke: "#6867AC",
               strokeWidth: 3,
               r: 7,
             }}
@@ -110,4 +112,4 @@ function Chart() {
   );
 }
 
-export default Chart;
+export default PMChart;

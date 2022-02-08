@@ -2,7 +2,6 @@
 
 .container {
   background-color: #fff;
-  margin: 2rem auto;
   border-radius: 5px;
 }
 
@@ -10,19 +9,28 @@
   &__clear {
     cursor: pointer;
     outline: none;
-    padding: 0.375rem 0.75rem;
-    border-radius: 0px 15px 0 15px;
+    border-radius: 10px;
+    padding: 8px 30px;
     font-size: 1rem;
+    font-weight: 600;
     font-family: inherit;
-    background: $primary;
-    color: $dark;
-    border: 1px solid transparent;
+    background: rgba(#993942, 0.25);
+    color: #993942;
+    font-weight: 500;
+    border: transparent;
     transition: 0.3s ease all;
 
+    @media (max-width: 768px) {
+      margin-bottom: 1rem;
+    }
+
     &:hover {
-      border-color: $primary;
-      background: rgba($primary, 0.1);
-      color: rgba($dark, 0.8);
+      border-color: none;
+      background: rgba(#993942, 0.35);
+    }
+    &:active {
+      border-color: none;
+      background: rgba(#993942, 0.35);
     }
   }
   &__search {

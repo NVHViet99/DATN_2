@@ -1,0 +1,92 @@
+.container {
+  max-width: 950px;
+  width: 100%;
+  overflow: hidden;
+  padding: 80px 0;
+}
+.container .main-card {
+  display: flex;
+  justify-content: space-evenly;
+  transition: 1s;
+}
+
+.container .main-card .cards {
+  width: 100%;
+
+  // margin: 0 20px;
+}
+.main-card .cards .card {
+  width: 17rem;
+  background: #fff;
+  // border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+  transition: all 0.4s ease;
+}
+// .main-card .cards .card:hover {
+//   transform: translateY(-15px);
+// }
+.cards .card .content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.cards .card .content .img {
+  height: 130px;
+  width: 130px;
+  border-radius: 50%;
+  padding: 3px;
+  background: #993942;
+  margin-bottom: 14px;
+}
+.card .content .img img {
+  height: 100%;
+  width: 100%;
+  border: 3px solid #ffff;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.card .content .name {
+  font-size: 20px;
+  font-weight: 500;
+}
+.card .content .job {
+  font-size: 20px;
+  color: #993942;
+}
+.card .content .media-icons {
+  margin-top: 10px;
+  display: flex;
+}
+.media-icons a {
+  text-align: center;
+  line-height: 23px;
+  height: 25px;
+  width: 25px;
+  margin: 0 4px;
+  font-size: 12px;
+  color: #fff;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: #993942;
+  transition: all 0.3s ease;
+}
+.media-icons a:hover {
+  color: #993942;
+  background-color: #fff;
+  border-color: #993942;
+}
+
+.option {
+  &__select {
+    padding: 7px 12px;
+    border-radius: 5px;
+    margin-left: 10px;
+    &:focus {
+      outline: none;
+    }
+  }
+}

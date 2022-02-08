@@ -83,7 +83,7 @@
       position: absolute;
       height: 3px;
       width: 30px;
-      background: linear-gradient(135deg, #2f86a6, #3e065f);
+      background: linear-gradient(135deg, #be7e84, #993942);
 
       border-radius: 3px;
       left: 0;
@@ -118,7 +118,8 @@
 
       &:focus,
       &:valid {
-        border-bottom: 3px solid #3e065f;
+        border-bottom: 3px solid #993942;
+        opacity: 0.5;
       }
     }
 
@@ -140,28 +141,28 @@
   align-items: center;
 
   &__submit {
-    height: 2.5rem;
+    cursor: pointer;
+    outline: none;
+    border-radius: 10px;
+    height: 40px;
     width: 100%;
-    outline: none;
-    background: linear-gradient(135deg, #2f86a6, #3e065f);
-    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: inherit;
+    background: rgba(#993942, 0.25);
+    color: #993942;
     font-weight: 500;
-    letter-spacing: 1.5px;
-    border-radius: 5px;
-    border: none;
-    transition: 0.3s;
-  }
+    border: transparent;
+    transition: 0.3s ease all;
 
-  &__submit:hover {
-    background: linear-gradient(-135deg, #2f86a6, #3e065f);
-    animation-name: background-color;
-    animation-duration: 0.4s;
-  }
-
-  &__submit:active {
-    border: none;
-    outline: none;
-    transform: translateY(5px);
+    &:hover {
+      border-color: none;
+      background: rgba(#993942, 0.35);
+    }
+    &:active {
+      border-color: none;
+      background: rgba(#993942, 0.35);
+    }
   }
 }
 

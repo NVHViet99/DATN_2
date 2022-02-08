@@ -5,7 +5,7 @@ import classes from "./UploadedImage.module.scss";
 import { useDispatch } from "react-redux";
 import { loadingActions } from "../../hooks/Loading";
 
-export default function UploadImage(props) {
+function UploadImage(props) {
   const [imageUrl, setImageUrl] = useState([]);
 
   const dispatch = useDispatch();
@@ -33,23 +33,23 @@ export default function UploadImage(props) {
   };
 
   // get imageUrl
-  const getImageUrl = () => {
-    const imageRef = firebase.database().ref("images").child("daily");
-    imageRef.on("value", (snapshot) => {
-      const imageUrls = snapshot.val();
-      const urls = [];
-      for (let id in imageUrls) {
-        urls.push({ id, url: imageUrls[id] });
-      }
-      const newState = [...imageUrl, ...urls];
-      setImageUrl(newState);
+  // const getImageUrl = () => {
+  //   const imageRef = firebase.database().ref("images").child("daily");
+  //   imageRef.on("value", (snapshot) => {
+  //     const imageUrls = snapshot.val();
+  //     const urls = [];
+  //     for (let id in imageUrls) {
+  //       urls.push({ id, url: imageUrls[id] });
+  //     }
+  //     const newState = [...imageUrl, ...urls];
+  //     setImageUrl(newState);
 
-      if (imageUrl) {
-        // setStatusLoading(false);
-        dispatch(loadingActions.stopLoading());
-      }
-    });
-  };
+  //     if (imageUrl) {
+  //       // setStatusLoading(false);
+  //       dispatch(loadingActions.stopLoading());
+  //     }
+  //   });
+  // };
 
   const deleteImage = (id) => {
     dispatch(loadingActions.startLoading());
@@ -61,6 +61,23 @@ export default function UploadImage(props) {
   };
 
   useEffect(() => {
+    const getImageUrl = () => {
+      const imageRef = firebase.database().ref("images").child("daily");
+      imageRef.on("value", (snapshot) => {
+        const imageUrls = snapshot.val();
+        const urls = [];
+        for (let id in imageUrls) {
+          urls.push({ id, url: imageUrls[id] });
+        }
+        const newState = [...imageUrl, ...urls];
+        setImageUrl(newState);
+
+        if (imageUrl) {
+          // setStatusLoading(false);
+          dispatch(loadingActions.stopLoading());
+        }
+      });
+    };
     getImageUrl();
   }, []);
 
@@ -114,3 +131,5 @@ export default function UploadImage(props) {
     </div>
   );
 }
+
+export default UploadImage;

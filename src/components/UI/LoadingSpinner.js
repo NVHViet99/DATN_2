@@ -6,7 +6,7 @@ const LoadingSpinner = () => {
   return (
     <Modal className={classes.center}>
       <div className="centered">
-        <div className={classes.spinner}></div>;
+        <div className={classes.spinner}></div>
       </div>
     </Modal>
   );

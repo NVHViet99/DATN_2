@@ -12,14 +12,21 @@ import Home from "./pages/Home";
 import PageFour from "./pages/PageFour";
 
 import { AnimatePresence } from "framer-motion";
+import Footer from "./components/Header/Footer";
+import GotoTop from "./components/UI/GotoTop";
+import DarkMode from "./components/UI/DarkMode";
 
 function App() {
   const isToken = useSelector((state) => state.auth.token);
   const location = useLocation();
+  const loading = useSelector((state) => state.loading.isLoading);
 
   return (
-    <>
-      <Header />
+    <div>
+      <div className="mb-5rem">
+        <Header />
+      </div>
+      <DarkMode />
       <main>
         <AnimatePresence exitBeforeEnter>
           <Switch location={location} key={location.pathname}>
@@ -52,7 +59,9 @@ function App() {
           </Switch>
         </AnimatePresence>
       </main>
-    </>
+      <div className="mt-5rem">{isToken && !loading && <Footer />}</div>
+      <GotoTop />
+    </div>
   );
 }
 
